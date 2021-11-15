@@ -1,7 +1,7 @@
-function ep = equalizacao_histograma(path_img)
+function y = equalizacao_histograma(path_img)
 %{
     equalizacao_histograma (str) : Path da imagem
-    ep : imagem equalizada
+    y : imagem equalizada
 %}
 
 % leitura da imagem
@@ -37,7 +37,7 @@ for i=1:size_image(1)
     end
 end
 
-% comparando com a função nativa do matlab
+% comparando com a funÃ§Ã£o nativa do matlab
 figure;
 subplot(2, 1, 1);
 plot(hist1);
@@ -58,11 +58,11 @@ for i=2:256
 end
 cdf = round(255*cdf);
 
-ep = zeros(size_image);
+y = zeros(size_image);
 for i=1:size_image(1)
     for j=1:size_image(2)
         t=(imagem_cinza(i,j)+1);
-        ep(i,j)=cdf(t);
+        y(i,j)=cdf(t);
     end                                             
 end
 
@@ -71,7 +71,7 @@ hist2 = zeros(1,256);
 for i=1:size_image(1)
     for j=1:size_image(2)
         for k=0:255
-            if ep(i,j)==k
+            if y(i,j)==k
                 hist2(k+1)=hist2(k+1)+1;
             end
         end
@@ -81,11 +81,11 @@ end
 % comparando 
 figure;
 subplot(2, 1, 1);
-imshow(uint8(ep));
-title('Equalização');
+imshow(uint8(y));
+title('EqualizaÃ§Ã£o');
 subplot(2, 1, 2);
 histeq(imagem_cinza_original);
-title('Equalização MATLAB', "color", "green");
+title('EqualizaÃ§Ã£o MATLAB', "color", "green");
 
 figure;
 subplot(2, 1, 1);
